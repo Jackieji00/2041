@@ -21,23 +21,23 @@ BEGIN{
   test_code = ""                # no code is part of the test yet
 }
 
-/(* BEG_TEST *)/{               # begining of test
+/ BEG_TEST /{                   # begining of test
   in_test = 1
   test_code = ""                # reset test code
   debug_print("begin test")
 }
 
-/(* END_TEST *)/{               # end of test
+/ END_TEST /{                   # end of test
   in_test = 0
   test_code = ""                # reset test code
   debug_print("end test")
 }
 
 # Matched a line that is in a test
-in_test==1 && $0 !~ /(* BEG_TEST *)/{
+in_test==1 && $0 !~ / BEG_TEST /{
   line_esc = $0                 # escape the backslashes and other special chars
   gsub("\\\\","\\\\",line_esc)  # that are in the current line of code
-  gsub("\"","\\\"",line_esc)    
+  gsub("\"","\\\"",line_esc)
   line_esc = FNR ":" line_esc
   test_code = test_code line_esc "\\n" # add on the escaped code to the current test code
   debug_print("in test, adding : " $0)

@@ -122,7 +122,18 @@ PROBLEM 2: colsum and the stack
   `colsum_nt 10' and print some intermediate and final results. Paste
   the lines you use to compile and run the `colsum.ml' below as well as
   the output for the program.
+-----------
+This recursive function add numbers in some order. When the number is even, it will divided by 2; when it is odd, it will multiply by 3 and add 1. It will add all those number after calculation together until the number is 1.It also output each number after each recursion.
 
+Output:
+10
+5
+16
+8
+4
+2
+1
+sum: 46
 
 (B)
 ~~~
@@ -169,7 +180,26 @@ PROBLEM 2: colsum and the stack
    line:11    next  16  
               rest  ??  
   ----------------------
-   ...        ...   ... 
+   colsum_nt  n     16   
+   line:11    next  8  
+              rest  ??
+  ----------------------
+   colsum_nt  n     8   
+   line:11    next  4  
+              rest  ??
+  ----------------------
+   colsum_nt  n     4   
+   line:11    next  2  
+              rest  ?? 
+  ----------------------
+   colsum_nt  n     2   
+   line:11    next  1  
+              rest  ??
+  ----------------------
+   colsum_nt  n     1   
+   Line:4     next  ??
+              rest  ??  
+  ----------------------  
 
 
 (C)
@@ -197,7 +227,8 @@ PROBLEM 2: colsum and the stack
 
   Explain why this version is still NOT tail recursive and in fact will
   execute identically to the previous `colsum_nt' version.
-
+------------------
+In line 11, it does n + the recursion as the first thing. call is not the last thing in the recursive case.
 
 (D)
 ~~~
@@ -206,3 +237,19 @@ PROBLEM 2: colsum and the stack
   strategy for this is to use an internal helper function which takes
   some additional parameters beyond single value.  Paste your code below
   and show that it works identically to `colsum_nt'.
+-----------------------------------------
+let colsum_tr n =
+  let rec helper result input =
+    if input = 1 then
+      result+1
+    else
+      let input0 =
+        if input mod 2 = 0 then
+          input/2
+        else 3*input+1
+      in
+      let r = result+input in
+      helper r input0
+  in helper 0 n
+;;
+Most part is about same. I just add a variable result to keep getting the same result in each recursion. 

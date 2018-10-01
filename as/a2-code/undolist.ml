@@ -6,31 +6,6 @@
 
    All functions in this file pertain to PROBLEM 3
 *)
-open Printf;;
-let quote_str str = sprintf "\"%s\"" str;;
-let list2str convert lst =
-  let buf = Buffer.create 128 in
-  Buffer.add_string buf "[";
-  let iterf x =
-    let s = convert x in
-    Buffer.add_string buf (sprintf "%s; " s);
-  in
-  List.iter iterf lst;
-  let buflen = Buffer.length buf in
-  if buflen > 2 then
-    Buffer.truncate buf (buflen-2);
-  Buffer.add_string buf "]";
-  Buffer.contents buf;
-;;
-let strlist2str = list2str quote_str;;
-
-let strlistlist2str strlistlist =
-   let lines = List.map strlist2str strlistlist in
-   let linestr = String.concat ";\n  " lines in
-   "[ " ^ linestr ^ " ]\n"
- ;;
-
-
 
 let curr_list : string list ref = ref []
 ;;
@@ -54,9 +29,9 @@ let reset_all () =
 
 
 let set_to_list new_list =
-  redo_stack :=[];
-  undo_stack := !curr_list :: !undo_stack;
-  curr_list := new_list
+  redo_stack :=[];                         (*Empties redo_stack*)
+  undo_stack := !curr_list :: !undo_stack; (*curr_list is moved to the top of the undo_Stack*)
+  curr_list := new_list                    (*curr_list is set to the new_list. *)
 ;;
 (* curr_list is moved to the top of the undo_Stack. Then curr_list is
    set to the new_list. Empties redo_stack. *)
@@ -83,21 +58,21 @@ let merge_with_list list =
    the result to enable undoing. *)
 
 let undo () =
-  if undo_stack != ref [] then
-    begin
-      if (!redo_stack = []&& !curr_list =[]) then
-        redo_stack := []
+  if undo_stack != ref [] then                     (*if the undo_stack is not empty*)
+    begin                                          (*the top element of undo_stack is removed and becomes curr_list*)
+      if (!redo_stack = []&& !curr_list =[]) then  (* if both curr_list and redo_stack is empty*)
+        redo_stack := []                           (* set redo_stack empty list *)
       else if !curr_list != [] then
-        redo_stack := !curr_list::!redo_stack;
+        redo_stack := !curr_list::!redo_stack;     (*else current become redo_stack*)
       match !undo_stack with
       | head::tail ->
-        undo_stack := tail;
+        undo_stack := tail;                        (*head of undo_stack is removed and become curr_list*)
         curr_list := head;
-        true
+        true                                       (*return true*)
       | [] -> false
     end
   else
-    false
+    false                                          (*rest all return false*)
 ;;
 (* If the undo_stack is not empty, undo the last operation. curr_list
    is moved to the redo_stack and the top element of undo_stack is
@@ -106,17 +81,17 @@ let undo () =
    in constant time. *)
 
 let redo () =
-  if !redo_stack != [] then
-    begin
-    undo_stack := !curr_list::!undo_stack;
+  if !redo_stack != [] then                   (*If the redo_stack is not empty*)
+    begin                                     (*redo the last operation*)
+    undo_stack := !curr_list::!undo_stack;    (*curr_list is moved to the undo_stack*)
     let tail = List.tl !redo_stack in
     let head = List.hd !redo_stack in
-    redo_stack := tail;
+    redo_stack := tail;                       (*the top element of redo_stack is removed and becomes curr_list*)
     curr_list := head;
-      true
+      true                                    (*return true*)
     end
   else
-    false
+    false                                     (*rest situation return false*)
 ;;
 (* If the redo_stack is not empty, redo the last operation. curr_list
    is moved to the undo_stack and the top element of redo_stack is

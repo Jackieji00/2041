@@ -41,7 +41,7 @@ Mltest.main [|
 (* undolist.ml tests *)
 
 (fun () ->
-  
+
   (* BEG_TEST *)
   (* Undolist.set_to_list reset_all *)
   Undolist.reset_all ();
@@ -52,7 +52,7 @@ Mltest.main [|
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
 
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.set_to_list set_to_list then reset_all *)
   Undolist.reset_all ();
@@ -73,7 +73,7 @@ Mltest.main [|
 
 
 (fun () ->
-  
+
   (* BEG_TEST *)
   (* Undolist.set_to_list several times *)
   Undolist.reset_all ();
@@ -88,7 +88,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.set_to_list several times *)
   Undolist.reset_all ();
@@ -127,7 +127,7 @@ Mltest.main [|
 );
 
 (fun () ->
-  
+
   (* BEG_TEST *)
   (* Undolist.add_elem several times *)
   Undolist.reset_all ();
@@ -140,7 +140,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.add_elem several times *)
   Undolist.reset_all ();
@@ -159,7 +159,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.add_elem several times *)
   Undolist.reset_all ();
@@ -187,7 +187,7 @@ Mltest.main [|
 );
 
 (fun () ->
-  
+
   (* BEG_TEST *)
   (* Undolist.add_elem and remove_elem several times *)
   Undolist.reset_all ();
@@ -202,7 +202,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.add_elem and remove_elem several times *)
   Undolist.reset_all ();
@@ -217,7 +217,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.add_elem and remove_elem several times *)
   Undolist.reset_all ();
@@ -234,7 +234,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.add_elem and remove_elem several times *)
   Undolist.reset_all ();
@@ -259,7 +259,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.add_elem and remove_elem several times *)
   Undolist.reset_all ();
@@ -299,7 +299,7 @@ Mltest.main [|
 );
 
 (fun () ->
-  
+
   (* BEG_TEST *)
   (* Undolist.merge_with_list *)
   Undolist.reset_all ();
@@ -312,7 +312,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.merge_with_list *)
   Undolist.reset_all ();
@@ -327,7 +327,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.merge_with_list *)
   Undolist.reset_all ();
@@ -344,7 +344,7 @@ Mltest.main [|
   let msg = make_msg expect_curr expect_undo expect_redo in
   __check__ ( expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.merge_with_list *)
   Undolist.reset_all ();
@@ -362,7 +362,7 @@ Mltest.main [|
 );
 
 (fun () ->
-  
+
   (* BEG_TEST *)
   (* Undolist.undo operations then undos *)
   Undolist.reset_all ();
@@ -378,7 +378,7 @@ Mltest.main [|
   let msg = make_msg_ret expect_ret actual_ret expect_curr expect_undo expect_redo in
   __check__ ( expect_ret  =  actual_ret && expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.undo operations then undos *)
   Undolist.reset_all ();
@@ -395,7 +395,7 @@ Mltest.main [|
   let msg = make_msg_ret expect_ret actual_ret expect_curr expect_undo expect_redo in
   __check__ ( expect_ret  =  actual_ret && expect_curr = !curr_list && expect_undo = !undo_stack && expect_redo = !redo_stack );
   (* END_TEST *)
-  
+
   (* BEG_TEST *)
   (* Undolist.undo operations then undos *)
   Undolist.reset_all ();
@@ -874,4 +874,4 @@ Mltest.main [|
 
 );
 
-|];;    
+|];;

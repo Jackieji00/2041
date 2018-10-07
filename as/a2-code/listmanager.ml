@@ -5,7 +5,7 @@
 open Printf;;
 
 (* debug printing on/off *)
-let debug = ref false;;
+let debug = ref faldse;;
 
 (* Help string to be printed for the "help" command. *)
 let help_string =
